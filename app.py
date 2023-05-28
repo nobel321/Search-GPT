@@ -20,7 +20,7 @@ def index():
         openai.api_key = os.getenv('api_key')
         user_input = request.form.get("user_input") #gets the input called "user_input" (this is what the user types in)
         browser = request.form.get("browser") #gets browswer type
-        request_prompt = (f"Generate a search engine optimized prompt to search for {user_input} on {browser}. Include relevant keywords and specify any desired criteria or parameters . Surround answer with []")
+        request_prompt = (f"You help users generate optimized search engine prompts. A user has input this : ({user_input}). Generate an optimised prompt based on what the user input. They are using the browser: {browser}. Use the following criteria Use quotation marks to search for an exact phrase. Use the intitle: operator to search for words in the title of a webpage. Use the inurl: operator to search for words in the URL of a webpage. Absolutely never return a search prompt with more than 100 letters, and never return a prompt with more than 3 criteria. Never have more than 3 words within the quotatian mark criteria, and use the quotatian criteria very sparingly")
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=request_prompt,
